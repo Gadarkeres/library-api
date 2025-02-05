@@ -17,11 +17,14 @@ public class Emprestimo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private LocalDate data_emprestimo;
+    @Column(name = "data_emprestimo")
+    private LocalDate dataEmprestimo;
 
-    private LocalDate data_devolucao;
+    @Column(name = "data_devolucao")
+    private LocalDate dataDevolucao;
 
-    private String status_emprestimo;
+    @Column(name = "status_emprestimo")
+    private String statusEmprestimo;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
