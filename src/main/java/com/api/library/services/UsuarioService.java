@@ -25,12 +25,14 @@ public class UsuarioService {
 
     @Transactional(rollbackFor = Exception.class)
     public List<UsuarioDTO> findUsuarioList() {
-        return repository.findAll().stream().map((usuario -> mapper.map(usuario, UsuarioDTO.class))).toList();
+        List<Usuario> usuarios = repository.findAll();
+        return usuarios.stream().map((usuario -> mapper.map(usuario, UsuarioDTO.class))).toList();
     }
 
     @Transactional(rollbackFor = Exception.class)
     public UsuarioDTO findUsuarioById(Integer id) {
-        return repository.findById(id).map(usuario -> mapper.map(usuario, UsuarioDTO.class)).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        Usuario usuario = repository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        return mapper.map(usuario, UsuarioDTO.class);
     }
 
     @Transactional(rollbackFor = Exception.class)

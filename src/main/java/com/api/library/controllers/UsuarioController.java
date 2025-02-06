@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,6 +21,15 @@ public class UsuarioController {
     @Autowired
     public UsuarioController(UsuarioService service) {
         this.service = service;
+    }
+    @GetMapping("find-by-id/{id}")
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findUsuarioById(id));
+    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<List<UsuarioDTO>> findAll() {
+        return ResponseEntity.ok().body(service.findUsuarioList());
     }
 
     @PostMapping("/save")
