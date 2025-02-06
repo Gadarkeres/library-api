@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "usuarios")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 public class Usuario {
@@ -23,11 +23,11 @@ public class Usuario {
     private String email;
 
     @Column(name = "data_cadastro")
-
     private LocalDate dataCadastro;
 
     private String telefone;
 
     @OneToMany(mappedBy = "usuario")
     private List<Emprestimo> emprestimos;
+
 }

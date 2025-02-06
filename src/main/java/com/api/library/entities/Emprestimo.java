@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "emprestimos")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 public class Emprestimo {

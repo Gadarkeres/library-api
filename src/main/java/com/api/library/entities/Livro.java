@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "livros")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 public class Livro {
