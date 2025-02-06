@@ -6,10 +6,12 @@ import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -36,9 +38,25 @@ public class UsuarioService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public UsuarioDTO saveDTO(@Valid UsuarioDTO usuarioDTO) {
+    public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
+        if(usuarioDTO.getDataCadastro().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("A data de cadastro não pode ser no passado");
+        }
         Usuario usuarioEntity = repository.save(mapper.map(usuarioDTO, Usuario.class));
         return mapper.map(usuarioEntity, UsuarioDTO.class);
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    public UsuarioDTO patchUsuario(@Valid UsuarioDTO usuarioDTO) {
+        Usuario usuario = repository.findById(usuarioDTO.getId()).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        BeanUtils.copyProperties(usuarioDTO, usuario);
+        return mapper.map(repository.save(usuario), UsuarioDTO.class);
+    };
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteUsuario(Integer id) {
+        this.repository.deleteById(id);
     }
 
 

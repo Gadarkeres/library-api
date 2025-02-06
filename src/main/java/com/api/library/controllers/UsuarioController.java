@@ -32,8 +32,19 @@ public class UsuarioController {
         return ResponseEntity.ok().body(service.findUsuarioList());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid UsuarioDTO usuarioDTO) {
-        return ResponseEntity.ok().body(service.saveDTO(usuarioDTO));
+        return ResponseEntity.ok().body(service.createUsuario(usuarioDTO));
+    }
+
+    @PatchMapping("/patch")
+    public ResponseEntity<UsuarioDTO> patch(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok().body(service.patchUsuario(usuarioDTO));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.deleteUsuario(id);
+        return ResponseEntity.ok().build();
     }
 }
