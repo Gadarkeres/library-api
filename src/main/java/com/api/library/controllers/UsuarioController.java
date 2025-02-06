@@ -4,8 +4,6 @@ package com.api.library.controllers;
 import com.api.library.dtos.UsuarioDTO;
 import com.api.library.services.UsuarioService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

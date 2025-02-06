@@ -1,12 +1,9 @@
 package com.api.library.dtos;
 
-import com.api.library.entities.Emprestimo;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor

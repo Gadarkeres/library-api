@@ -5,8 +5,6 @@ import com.api.library.entities.Usuario;
 import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
