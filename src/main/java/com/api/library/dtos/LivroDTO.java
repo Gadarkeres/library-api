@@ -1,5 +1,6 @@
 package com.api.library.dtos;
 
+import com.api.library.enums.Categoria;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,5 +18,5 @@ public class LivroDTO {
     @NotNull(message = "O ISBN é obrigatório")
     private String isbn;
     @NotNull(message = "A categoria é obrigatória")
-    private String categoria;
+    private Categoria categoria;
 }

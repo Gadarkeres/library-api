@@ -1,5 +1,6 @@
 package com.api.library.entities;
 
+import com.api.library.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,14 +24,15 @@ public class Emprestimo {
     @Column(name = "data_devolucao")
     private LocalDate dataDevolucao;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_emprestimo")
-    private String statusEmprestimo;
+    private Status statusEmprestimo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "livro_id")
     private Livro livro;
 

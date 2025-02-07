@@ -1,5 +1,6 @@
 package com.api.library.dtos;
 
+import com.api.library.enums.Status;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,9 @@ public class EmprestimoDTO {
     @NotNull(message = "A data de devolucao é obrigatória")
     private LocalDate dataDevolucao;
     @NotNull(message = "O status é obrigatório")
-    private String statusEmprestimo;
+    private Status statusEmprestimo;
 
-    private UsuarioDTO usuario;
-    private LivroDTO livro;
+    private Integer usuarioId;
+    private Integer livroId;
 
 }

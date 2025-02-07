@@ -1,5 +1,6 @@
 package com.api.library.entities;
 
+import com.api.library.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,8 @@ public class Livro {
 
     private String isbn;
 
-    private String categoria;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     @OneToMany(mappedBy = "livro")
     private List<Emprestimo> emprestimos;

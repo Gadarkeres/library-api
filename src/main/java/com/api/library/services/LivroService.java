@@ -35,17 +35,20 @@ public class LivroService {
         return mapper.map(livro, LivroDTO.class);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public LivroDTO createLivro(LivroDTO livroDTO) {
         Livro livroEntity = repository.save(mapper.map(livroDTO, Livro.class));
         return mapper.map(livroEntity, LivroDTO.class);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public LivroDTO patchLivro(@Valid LivroDTO livroDTO) {
         Livro livro = repository.findById(livroDTO.getId()).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
         BeanUtils.copyProperties(livroDTO, livro);
         return mapper.map(repository.save(livro), LivroDTO.class);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteLivro(Integer id) {
         this.repository.deleteById(id);
     }
