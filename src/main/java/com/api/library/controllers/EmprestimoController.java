@@ -3,6 +3,8 @@ package com.api.library.controllers;
 
 import com.api.library.dtos.EmprestimoDTO;
 import com.api.library.services.EmprestimoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/emprestimos")
+@Tag(name = "Emprestimos", description = "Operações relacionadas aos empréstimos")
 public class EmprestimoController {
     // Serviço que lida com operações de emprestimo
     private final EmprestimoService service;
@@ -24,6 +27,7 @@ public class EmprestimoController {
      *
      * @return EmprestimoDTO com os dados do Emprestimo recém-criado
      */
+    @Operation(summary = "Cria um novo Emprestimo")
     @PostMapping("/create")
     public ResponseEntity<EmprestimoDTO> save(@RequestBody @Valid EmprestimoDTO emprestimoDTO) {
         return ResponseEntity.ok().body(service.createEmprestimo(emprestimoDTO));
@@ -34,6 +38,7 @@ public class EmprestimoController {
      *
      * @return Lista de EmprestimoDTO com todos os Emprestimos cadastrados.
      */
+    @Operation(summary = "Lista todos os Emprestimos")
     @GetMapping("/find-all")
     public ResponseEntity<List<EmprestimoDTO>> findAll() {
         return ResponseEntity.ok().body(service.findEmprestimoList());
