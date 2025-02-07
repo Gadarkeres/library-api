@@ -1,6 +1,7 @@
 package com.api.library.services;
 
 import com.api.library.dtos.EmprestimoDTO;
+import com.api.library.dtos.PatchEmprestimoDTO;
 import com.api.library.entities.Emprestimo;
 import com.api.library.entities.Livro;
 import com.api.library.entities.Usuario;
@@ -12,10 +13,12 @@ import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -45,14 +48,14 @@ public class EmprestimoService {
      */
     @Transactional(rollbackFor = Exception.class)
     public EmprestimoDTO createEmprestimo(@Valid EmprestimoDTO emprestimoDTO) {
-        Livro livro = livroRepository.findById(emprestimoDTO.getLivroId()).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
-        Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuarioId()).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        Livro livro = this.findLivroById(emprestimoDTO.getLivroId());
+        Usuario usuario = this.findUsuarioById(emprestimoDTO.getUsuarioId());
 
         if (!checkIfEmprestimoIsValid(livro)) {
             throw new IllegalArgumentException("Este livro ja possui um emprestimo ativo: " + livro.getId());
         }
 
-        Emprestimo emprestimo = new Emprestimo(null, emprestimoDTO.getDataEmprestimo(), emprestimoDTO.getDataDevolucao(), emprestimoDTO.getStatusEmprestimo(), usuario, livro);
+        Emprestimo emprestimo = new Emprestimo(null, LocalDate.now(), emprestimoDTO.getDataDevolucao(), Status.EMPRESTADO, usuario, livro);
         return mapper.map(repository.save(emprestimo), EmprestimoDTO.class);
     }
 
@@ -72,7 +75,37 @@ public class EmprestimoService {
      *
      * @return Uma lista de EmprestimoDTO contendo os dados de todos os empréstimos
      */
+    @Transactional(rollbackFor = Exception.class)
     public List<EmprestimoDTO> findEmprestimoList() {
         return repository.findAll().stream().map((emprestimo -> mapper.map(emprestimo, EmprestimoDTO.class))).toList();
+    }
+
+    /**
+     * Atualiza parcialmente os dados de um empréstimo existente
+     *
+     * @return Um EmprestimoDTO com os dados do empréstimo atualizado
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public EmprestimoDTO patchEmprestimo(PatchEmprestimoDTO patchEmprestimoDTO) {
+        Emprestimo emprestimo = repository.findById(patchEmprestimoDTO.getId()).orElseThrow(() -> new NotFoundException("Emprestimo não encontrado"));
+
+        if (patchEmprestimoDTO.getStatusEmprestimo() != null) {
+            emprestimo.setStatusEmprestimo(patchEmprestimoDTO.getStatusEmprestimo());
+        }
+
+        if (patchEmprestimoDTO.getDataDevolucao() != null) {
+            emprestimo.setDataDevolucao(patchEmprestimoDTO.getDataDevolucao());
+        }
+        return mapper.map(repository.save(emprestimo), EmprestimoDTO.class);
+    }
+
+    public Livro findLivroById(Integer id) {
+        Livro livro = livroRepository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
+        return livro;
+    }
+
+    public Usuario findUsuarioById(Integer id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        return usuario;
     }
 }

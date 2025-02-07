@@ -2,6 +2,7 @@ package com.api.library.controllers;
 
 
 import com.api.library.dtos.EmprestimoDTO;
+import com.api.library.dtos.PatchEmprestimoDTO;
 import com.api.library.services.EmprestimoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,6 +43,12 @@ public class EmprestimoController {
     @GetMapping("/find-all")
     public ResponseEntity<List<EmprestimoDTO>> findAll() {
         return ResponseEntity.ok().body(service.findEmprestimoList());
+    }
+
+    @Operation(summary = "atualizar um emprestimo existente")
+    @PatchMapping("/patch")
+    public ResponseEntity<EmprestimoDTO> patch(@RequestBody @Valid PatchEmprestimoDTO patchEmprestimoDTO) {
+        return ResponseEntity.ok().body(service.patchEmprestimo(patchEmprestimoDTO));
     }
 
 
