@@ -6,6 +6,9 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Entidade de representação da tabela "Usuarios"
+ */
 @Entity
 @Table(name = "usuarios")
 @AllArgsConstructor

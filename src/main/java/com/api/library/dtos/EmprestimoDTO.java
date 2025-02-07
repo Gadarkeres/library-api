@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * Classe DTO para Emprestimo para retorno de dados e para envio de dados
+ * Validação de campos obrigatórios
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

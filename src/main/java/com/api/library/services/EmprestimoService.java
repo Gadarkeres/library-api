@@ -34,12 +34,21 @@ public class EmprestimoService {
     }
 
 
+    /**
+     * Cria um novo emprestimo para o usuario.
+     * Esse metodo valida se o livro ja possui um emprestimo ativo, caso tenha ele lança um erro
+     * Se não houver emprestimos ativos, cria o emprestimo
+     *
+     * @return Um objeto EmprestimoDTO com os dados do empréstimo recém-criado
+     * @throws NotFoundException        Se o livro ou o usuário informado não forem encontrados
+     * @throws IllegalArgumentException Se o livro já tiver um empréstimo ativo
+     */
     @Transactional(rollbackFor = Exception.class)
     public EmprestimoDTO createEmprestimo(@Valid EmprestimoDTO emprestimoDTO) {
         Livro livro = livroRepository.findById(emprestimoDTO.getLivroId()).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
         Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuarioId()).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        if(!checkIfEmprestimoIsValid(livro)) {
+        if (!checkIfEmprestimoIsValid(livro)) {
             throw new IllegalArgumentException("Este livro ja possui um emprestimo ativo: " + livro.getId());
         }
 
@@ -47,10 +56,22 @@ public class EmprestimoService {
         return mapper.map(repository.save(emprestimo), EmprestimoDTO.class);
     }
 
+    /**
+     * Verifica se um livro pode ser emprestado
+     * O livro só será válido para empréstimo se todos os empréstimos associados a ele estiverem com o status "DEVOLVIDO"
+     *
+     * @return true se o livro estiver disponível para empréstimo, caso contrário false
+     */
     public Boolean checkIfEmprestimoIsValid(Livro livro) {
         return livro.getEmprestimos().stream().allMatch(emprestimo -> emprestimo.getStatusEmprestimo().equals(Status.DEVOLVIDO));
     }
 
+    /**
+     * Retorna a lista de todos os empréstimos registrados
+     * Os empréstimos são convertidos para o formato DTO para envio ao cliente
+     *
+     * @return Uma lista de EmprestimoDTO contendo os dados de todos os empréstimos
+     */
     public List<EmprestimoDTO> findEmprestimoList() {
         return repository.findAll().stream().map((emprestimo -> mapper.map(emprestimo, EmprestimoDTO.class))).toList();
     }

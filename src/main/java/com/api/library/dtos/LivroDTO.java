@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe DTO para Livros para retorno de dados e para envio de dados
+ * Validação de campos obrigatórios
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

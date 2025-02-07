@@ -6,6 +6,9 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * Entidade de representação da tabela "livros"
+ */
 @Entity
 @Table(name = "livros")
 @NoArgsConstructor
