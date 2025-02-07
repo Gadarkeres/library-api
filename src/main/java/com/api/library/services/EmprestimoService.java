@@ -99,13 +99,23 @@ public class EmprestimoService {
         return mapper.map(repository.save(emprestimo), EmprestimoDTO.class);
     }
 
+    /**
+     * Busca um livro pelo ID do livro
+     *
+     * @return Um livro
+     */
     public Livro findLivroById(Integer id) {
-        Livro livro = livroRepository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
-        return livro;
+        return livroRepository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
     }
 
+    /**
+     * Busca um usuario pelo ID do usuario
+     *
+     * @return Um usuario
+     */
     public Usuario findUsuarioById(Integer id) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
-        return usuario;
+        return usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
     }
+
+    ;
 }
