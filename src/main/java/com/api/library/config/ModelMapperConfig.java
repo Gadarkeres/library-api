@@ -1,4 +1,4 @@
-package com.api.library.mapper;
+package com.api.library.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

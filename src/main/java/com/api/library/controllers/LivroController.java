@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/livros")
 @Tag(name = "Livros", description = "Operações relacionadas aos livros")
+@RequiredArgsConstructor
 public class LivroController {
-    // Serviço que lida com as operações de livros
     private final LivroService service;
-
-    @Autowired
-    public LivroController(LivroService service) {
-        this.service = service;
-    }
 
     /**
      * Busca um livro pelo ID

@@ -5,6 +5,7 @@ import com.api.library.entities.Livro;
 import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.LivroRepository;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,10 @@ import java.util.List;
  * Esta classe inclui operações para criar, atualizar, buscar e deletar livros.
  */
 @Service
+@RequiredArgsConstructor
 public class LivroService {
     private final LivroRepository repository;
     private final ModelMapper mapper;
-
-    @Autowired
-    public LivroService(LivroRepository repository, ModelMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
     /**
      * Busca todos os livros cadastrados no sistema
      *

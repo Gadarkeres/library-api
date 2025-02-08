@@ -17,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -51,9 +53,9 @@ class EmprestimoServiceTest {
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
         emprestimo.setStatusEmprestimo(Status.EMPRESTADO);
-        when(livroRepository.findById(emprestimo.getLivro().getId())).thenReturn(java.util.Optional.of(livro));
-        when(usuarioRepository.findById(emprestimo.getUsuario().getId())).thenReturn(java.util.Optional.of(usuario));
-        livro.setEmprestimos(java.util.List.of(emprestimo));
+        when(livroRepository.findById(emprestimo.getLivro().getId())).thenReturn(Optional.of(livro));
+        when(usuarioRepository.findById(emprestimo.getUsuario().getId())).thenReturn(Optional.of(usuario));
+        livro.setEmprestimos(List.of(emprestimo));
         EmprestimoDTO emprestimoDTO = new EmprestimoDTO(emprestimo.getId(), emprestimo.getDataEmprestimo(), emprestimo.getDataDevolucao(), emprestimo.getStatusEmprestimo(), emprestimo.getUsuario().getId(), emprestimo.getLivro().getId());
 
         assertThrows(IllegalArgumentException.class, () -> emprestimoService.createEmprestimo(emprestimoDTO), "Livro ja possui um emprestimo ativo");

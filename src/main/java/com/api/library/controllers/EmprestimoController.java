@@ -8,6 +8,7 @@ import com.api.library.services.EmprestimoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/emprestimos")
 @Tag(name = "Emprestimos", description = "Operações relacionadas aos empréstimos")
+@RequiredArgsConstructor
 public class EmprestimoController {
     private final EmprestimoService service;
-
-    public EmprestimoController(EmprestimoService service) {
-        this.service = service;
-    }
 
     /**
      * Cria um novo Emprestimo

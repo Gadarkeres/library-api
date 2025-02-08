@@ -13,9 +13,7 @@ import java.util.List;
 @Table(name = "livros")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Getter
-@Setter
+@Data
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

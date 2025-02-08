@@ -5,6 +5,7 @@ import com.api.library.entities.Usuario;
 import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,10 @@ import java.util.List;
  * Inclui operações para listar, buscar, criar, atualizar e deletar usuários
  */
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
     private final UsuarioRepository repository;
     private final ModelMapper mapper;
-
-    @Autowired
-    public UsuarioService(UsuarioRepository repository, ModelMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     /**
      * Retorna a lista de todos os usuários cadastrados
@@ -77,12 +73,13 @@ public class UsuarioService {
         Usuario usuario = repository.findById(usuarioDTO.getId()).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
         BeanUtils.copyProperties(usuarioDTO, usuario);
         return mapper.map(repository.save(usuario), UsuarioDTO.class);
-    };
+    }
+
+    ;
 
 
     /**
      * Deleta um usuário pelo seu ID.
-     *
      */
     @Transactional(rollbackFor = Exception.class)
     public void deleteUsuario(Integer id) {

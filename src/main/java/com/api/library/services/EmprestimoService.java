@@ -14,6 +14,7 @@ import com.api.library.repositories.LivroRepository;
 import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +31,12 @@ import java.util.stream.Collectors;
  * Essa classe inclui operações para criar, atualizar emprestimos e recomendar livros
  */
 @Service
+@RequiredArgsConstructor
 public class EmprestimoService {
     private final EmprestimoRepository repository;
     private final ModelMapper mapper;
     private final LivroRepository livroRepository;
     private final UsuarioRepository usuarioRepository;
-
-    @Autowired
-    public EmprestimoService(EmprestimoRepository repository, ModelMapper mapper, LivroRepository livroRepository, UsuarioRepository usuarioRepository) {
-        this.repository = repository;
-        this.mapper = mapper;
-        this.livroRepository = livroRepository;
-        this.usuarioRepository = usuarioRepository;
-    }
-
 
     /**
      * Cria um novo emprestimo para o usuario.
