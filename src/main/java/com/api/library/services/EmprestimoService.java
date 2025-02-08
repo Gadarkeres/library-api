@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Classe de serviço para gerenciamento de emprestimos
+ * Essa classe inclui operações para criar, atualizar emprestimos e recomendar livros
+ */
 @Service
 public class EmprestimoService {
     private final EmprestimoRepository repository;

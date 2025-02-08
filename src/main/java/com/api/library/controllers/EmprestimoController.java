@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/emprestimos")
 @Tag(name = "Emprestimos", description = "Operações relacionadas aos empréstimos")
 public class EmprestimoController {
-    // Serviço que lida com operações de emprestimo
     private final EmprestimoService service;
 
     public EmprestimoController(EmprestimoService service) {
@@ -46,12 +45,22 @@ public class EmprestimoController {
         return ResponseEntity.ok().body(service.findEmprestimoList());
     }
 
+    /**
+     *  Atualiza parcialmente um emprestimo existente
+     * @param patchEmprestimoDTO
+     * @return EmprestimoDTO com os dados do emprestimo atualizado
+     */
     @Operation(summary = "atualizar um emprestimo existente")
     @PatchMapping("/patch")
     public ResponseEntity<EmprestimoDTO> patch(@RequestBody @Valid PatchEmprestimoDTO patchEmprestimoDTO) {
         return ResponseEntity.ok().body(service.patchEmprestimo(patchEmprestimoDTO));
     }
 
+    /**
+     * Verifica se um livro pode ser emprestado
+     * @param usuarioId
+     * @return Lista de LivroDTO com os livros recomendados
+     */
     @Operation(summary = "recomendar livros para o usuario")
     @GetMapping("recomendar-livros/{usuarioId}")
     public ResponseEntity<List<LivroDTO>> recomendarLivros(@PathVariable Integer usuarioId) {
