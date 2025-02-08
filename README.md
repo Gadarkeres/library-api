@@ -18,11 +18,6 @@ cd library-api
 code .
 ```
 
-- Instalar as dependências
-
-```bash
-mvn install
-```
 - Crie um banco de dados Postgres com o nome "library"
 - Após criar o banco de dados, configure as variáveis de ambiente como abaixo:
 
@@ -30,6 +25,12 @@ mvn install
 spring.datasource.url=jdbc:postgresql://localhost:5432/library // substitua pela sua url
 spring.datasource.username=postgres // substitua pelo seu usuario
 spring.datasource.password=root // substitua pela sua senha
+```
+
+- Instalar as dependências
+
+```bash
+mvn install
 ```
 
 - Este projeto utiliza Flyway para gerenciamento de migrations, será criado todas as tabelas e será populado automaticamente somente a tabela de livros, mas não deemprestimos incialmente.
