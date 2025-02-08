@@ -2,6 +2,7 @@ package com.api.library.controllers;
 
 
 import com.api.library.dtos.EmprestimoDTO;
+import com.api.library.dtos.LivroDTO;
 import com.api.library.dtos.PatchEmprestimoDTO;
 import com.api.library.services.EmprestimoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,5 +52,10 @@ public class EmprestimoController {
         return ResponseEntity.ok().body(service.patchEmprestimo(patchEmprestimoDTO));
     }
 
+    @Operation(summary = "recomendar livros para o usuario")
+    @GetMapping("recomendar-livros/{usuarioId}")
+    public ResponseEntity<List<LivroDTO>> recomendarLivros(@PathVariable Integer usuarioId) {
+        return ResponseEntity.ok().body(service.recomendarLivros(usuarioId));
+    }
 
 }

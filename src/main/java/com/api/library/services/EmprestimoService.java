@@ -1,10 +1,12 @@
 package com.api.library.services;
 
 import com.api.library.dtos.EmprestimoDTO;
+import com.api.library.dtos.LivroDTO;
 import com.api.library.dtos.PatchEmprestimoDTO;
 import com.api.library.entities.Emprestimo;
 import com.api.library.entities.Livro;
 import com.api.library.entities.Usuario;
+import com.api.library.enums.Categoria;
 import com.api.library.enums.Status;
 import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.EmprestimoRepository;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class EmprestimoService {
@@ -117,5 +121,24 @@ public class EmprestimoService {
         return usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
     }
 
-    ;
+    /**
+     * Busca os livros recomendados para o usuario
+     * Filtra de acordo com a categoria que usuario ja leu e o id do livro que ele ja leu
+     *
+     * @return Uma lista de LivroDTO
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public List<LivroDTO> recomendarLivros(Integer usuarioId) {
+        Usuario usuario = this.findUsuarioById(usuarioId);
+        Set<Categoria> categoriasLidas = usuario.getEmprestimos().stream().map((emprestimo -> emprestimo.getLivro().getCategoria())).collect(Collectors.toSet());
+
+        if (categoriasLidas.isEmpty()) {
+            throw new IllegalArgumentException("O usuário ainda nao leu nenhum livro!");
+        }
+        Set<Integer> idsLivrosLidos = usuario.getEmprestimos().stream().map(emprestimo -> emprestimo.getLivro().getId()).collect(Collectors.toSet());
+
+        List<Livro> livrosParaRecomendar = livroRepository.findByCategoriaInAndIdNotIn(categoriasLidas, idsLivrosLidos);
+        return livrosParaRecomendar.stream().map(livro -> mapper.map(livro, LivroDTO.class)).toList();
+    }
+
 }
