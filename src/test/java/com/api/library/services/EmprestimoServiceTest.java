@@ -180,5 +180,4 @@ class EmprestimoServiceTest {
         assertEquals(novaDataDevolucao, resultado.getDataDevolucao());
         verify(emprestimoRepository, times(1)).save(emprestimo);
     }
-
 }
