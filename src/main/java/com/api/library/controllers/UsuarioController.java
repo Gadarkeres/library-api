@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +51,7 @@ public class UsuarioController {
     @Operation(summary = "Cria um novo Usuario")
     @PostMapping("/create")
     public ResponseEntity<UsuarioDTO> save(@RequestBody @Valid UsuarioDTO usuarioDTO) {
-        return ResponseEntity.ok().body(service.createUsuario(usuarioDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createUsuario(usuarioDTO));
     }
 
     /**
@@ -71,6 +72,6 @@ public class UsuarioController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.deleteUsuario(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

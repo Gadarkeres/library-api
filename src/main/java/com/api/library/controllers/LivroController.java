@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +52,7 @@ public class LivroController {
     @Operation(summary = "Cria um novo livro")
     @PostMapping("/create")
     public ResponseEntity<LivroDTO> save(@RequestBody @Valid LivroDTO livroDTO) {
-        return ResponseEntity.ok().body(service.createLivro(livroDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createLivro(livroDTO));
     }
 
     /**
@@ -72,7 +73,7 @@ public class LivroController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.deleteLivro(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

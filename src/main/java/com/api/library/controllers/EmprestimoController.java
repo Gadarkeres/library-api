@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class EmprestimoController {
     @Operation(summary = "Cria um novo Emprestimo")
     @PostMapping("/create")
     public ResponseEntity<EmprestimoDTO> save(@RequestBody @Valid EmprestimoDTO emprestimoDTO) {
-        return ResponseEntity.ok().body(service.createEmprestimo(emprestimoDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createEmprestimo(emprestimoDTO));
     }
 
     /**
