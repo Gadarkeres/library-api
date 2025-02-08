@@ -47,4 +47,7 @@ mvn test
 mvn spring-boot:run
 ``` 
 
-- Acessar a documentação do projeto em http://localhost:8080/swagger-ui/index.html
+##Acessando a API:
+
+- A API estará disponível em http://localhost:8080.
+- A documentação da API pode ser acessada via Swagger em: http://localhost:8080/swagger-ui/index.html.
