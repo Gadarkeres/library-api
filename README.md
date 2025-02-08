@@ -4,8 +4,9 @@ Este projeto utiliza java 21 com postgres como banco de dados e spring boot para
 ## Pre-requisitos
 
 - Java 21
-- Postgres
+- Postgres (16)
 - Spring Boot
+- git
 
 ## Instalação
 
@@ -31,7 +32,7 @@ spring.datasource.username=postgres // substitua pelo seu usuario
 spring.datasource.password=root // substitua pela sua senha
 ```
 
-- Este projeto utiliza Flyway para gerenciamento de migrations, será criado um catalogo de livros, mas não será criado um usuário e emprestimos incialmente.
+- Este projeto utiliza Flyway para gerenciamento de migrations, será criado todas as tabelas e será populado automaticamente somente a tabela de livros, mas não deemprestimos incialmente.
 ## Execução
 
 - Executando os testes
