@@ -67,7 +67,7 @@ public class EmprestimoService {
      * @return true se o livro estiver disponível para empréstimo, caso contrário false
      */
     public Boolean checkIfEmprestimoIsValid(Livro livro) {
-        return livro.getEmprestimos().stream().allMatch(emprestimo -> emprestimo.getStatusEmprestimo().equals(Status.DEVOLVIDO));
+        return  livro.getEmprestimos() == null || livro.getEmprestimos().stream().allMatch(emprestimo -> emprestimo.getStatusEmprestimo().equals(Status.DEVOLVIDO));
     }
 
     /**
@@ -126,7 +126,7 @@ public class EmprestimoService {
      */
     @Transactional(rollbackFor = Exception.class)
     public List<LivroDTO> recomendarLivros(Integer usuarioId) {
-        Usuario usuario = this.findUsuarioById(usuarioId);
+                Usuario usuario = this.findUsuarioById(usuarioId);
         Set<Categoria> categoriasLidas = usuario.getEmprestimos().stream().map((emprestimo -> emprestimo.getLivro().getCategoria())).collect(Collectors.toSet());
 
         if (categoriasLidas.isEmpty()) {

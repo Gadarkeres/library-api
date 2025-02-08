@@ -1,0 +1,16 @@
+INSERT INTO LIVROS (titulo, autor, isbn, categoria) VALUES
+    ('O Senhor dos Anéis', 'J.R.R. Tolkien', 'ISBN-001', 'AVENTURA'),
+    ('1984', 'George Orwell', 'ISBN-002', 'FICCAO'),
+    ('Orgulho e Preconceito', 'Jane Austen', 'ISBN-003', 'ROMANCE'),
+    ('A Culpa é das Estrelas', 'John Green', 'ISBN-004', 'DRAMA'),
+    ('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'ISBN-005', 'AVENTURA'),
+    ('Cem Anos de Solidão', 'Gabriel García Márquez', 'ISBN-006', 'DRAMA'),
+    ('Duna', 'Frank Herbert', 'ISBN-007', 'FICCAO'),
+    ('O Grande Gatsby', 'F. Scott Fitzgerald', 'ISBN-008', 'ROMANCE'),
+    ('As Crônicas de Nárnia', 'C.S. Lewis', 'ISBN-009', 'AVENTURA'),
+    ('A Menina que Roubava Livros', 'Markus Zusak', 'ISBN-010', 'DRAMA'),
+    ('O Hobbit', 'J.R.R. Tolkien', 'ISBN-011', 'AVENTURA'),
+    ('O Guia do Mochileiro das Galáxias', 'Douglas Adams', 'ISBN-012', 'FICCAO'),
+    ('A Seleção', 'Kiera Cass', 'ISBN-013', 'ROMANCE'),
+    ('O Apanhador no Campo de Centeio', 'J.D. Salinger', 'ISBN-014', 'DRAMA'),
+    ('Percy Jackson e o Ladrão de Raios', 'Rick Riordan', 'ISBN-015', 'AVENTURA');
