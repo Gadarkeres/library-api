@@ -13,11 +13,8 @@ import com.api.library.repositories.EmprestimoRepository;
 import com.api.library.repositories.LivroRepository;
 import com.api.library.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

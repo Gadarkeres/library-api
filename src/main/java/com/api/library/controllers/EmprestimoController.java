@@ -45,7 +45,8 @@ public class EmprestimoController {
     }
 
     /**
-     *  Atualiza parcialmente um emprestimo existente
+     * Atualiza parcialmente um emprestimo existente
+     *
      * @param patchEmprestimoDTO
      * @return EmprestimoDTO com os dados do emprestimo atualizado
      */
@@ -57,6 +58,7 @@ public class EmprestimoController {
 
     /**
      * Verifica se um livro pode ser emprestado
+     *
      * @param usuarioId
      * @return Lista de LivroDTO com os livros recomendados
      */

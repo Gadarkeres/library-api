@@ -4,15 +4,14 @@ import com.api.library.dtos.LivroDTO;
 import com.api.library.entities.Livro;
 import com.api.library.exceptions.NotFoundException;
 import com.api.library.repositories.LivroRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 /**
  * Classe responsável por fornecer serviços relacionados aos livros.
  * Esta classe inclui operações para criar, atualizar, buscar e deletar livros.
@@ -22,6 +21,7 @@ import java.util.List;
 public class LivroService {
     private final LivroRepository repository;
     private final ModelMapper mapper;
+
     /**
      * Busca todos os livros cadastrados no sistema
      *
@@ -70,11 +70,10 @@ public class LivroService {
 
     /**
      * Deleta um livro pelo seu ID.
-     *
      */
     @Transactional(rollbackFor = Exception.class)
     public void deleteLivro(Integer id) {
-       Livro livro = repository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
-       repository.delete(livro);
+        Livro livro = repository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
+        repository.delete(livro);
     }
 }

@@ -2,7 +2,9 @@ package com.api.library.entities;
 
 import com.api.library.enums.Categoria;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
