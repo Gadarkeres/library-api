@@ -74,6 +74,7 @@ public class LivroService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void deleteLivro(Integer id) {
-        this.repository.deleteById(id);
+       Livro livro = repository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
+       repository.delete(livro);
     }
 }

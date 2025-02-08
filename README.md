@@ -31,6 +31,9 @@ spring.datasource.username=postgres // substitua pelo seu usuario
 spring.datasource.password=root // substitua pela sua senha
 ```
 
+- Este projeto utiliza Flyway para gerenciamento de migrations, será criado um catalogo de livros, mas não será criado um usuário inicialmente e emprestimos.
+## Execução
+
 - Executando os testes
 
 ```bash

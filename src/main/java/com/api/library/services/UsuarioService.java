@@ -83,7 +83,8 @@ public class UsuarioService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void deleteUsuario(Integer id) {
-        this.repository.deleteById(id);
+        Usuario usuario = repository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        repository.delete(usuario);
     }
 
 
