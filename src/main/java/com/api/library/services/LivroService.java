@@ -62,7 +62,7 @@ public class LivroService {
      * @throws NotFoundException Se o livro não for encontrado.
      */
     @Transactional(rollbackFor = Exception.class)
-    public LivroDTO patchLivro(@Valid LivroDTO livroDTO) {
+    public LivroDTO patchLivro(LivroDTO livroDTO) {
         Livro livro = repository.findById(livroDTO.getId()).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
         BeanUtils.copyProperties(livroDTO, livro);
         return mapper.map(repository.save(livro), LivroDTO.class);

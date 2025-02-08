@@ -2,6 +2,7 @@ package com.api.library.services;
 
 import com.api.library.dtos.EmprestimoDTO;
 import com.api.library.dtos.LivroDTO;
+import com.api.library.dtos.PatchEmprestimoDTO;
 import com.api.library.entities.Emprestimo;
 import com.api.library.entities.Livro;
 import com.api.library.entities.Usuario;
@@ -24,11 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Classe de testes para a classe EmprestimoService
@@ -132,6 +132,53 @@ class EmprestimoServiceTest {
         assertNotNull(livrosRecomendadosDTO, "Livros recomendados devem ser retornados.");
         assertEquals(1, livrosRecomendadosDTO.size(), "Um livro deve ser recomendado.");
         assertEquals("Livro 3", livrosRecomendadosDTO.get(0).getTitulo(), "O nome do livro recomendado deve ser 'Livro 3'.");
+    }
+
+    @Test
+    @DisplayName("Deve atualizar o status de um empréstimo com sucesso")
+    void deveAtualizarStatusDoEmprestimo() {
+        Livro livro = new Livro(1, "Livro 1", "Autor 1", "ISBN 1", Categoria.DRAMA, null);
+        Usuario usuario = new Usuario(1, "Nome 1", "Email 1", LocalDate.now(), "Telefone 1", null);
+        Emprestimo emprestimo = new Emprestimo(1, LocalDate.now(), LocalDate.now(), Status.EMPRESTADO, usuario, livro);
+
+        PatchEmprestimoDTO patchDTO = new PatchEmprestimoDTO();
+        patchDTO.setId(1);
+        patchDTO.setStatusEmprestimo(Status.DEVOLVIDO);
+
+        when(emprestimoRepository.findById(1)).thenReturn(Optional.of(emprestimo));
+        when(emprestimoRepository.save(any(Emprestimo.class))).thenReturn(emprestimo);
+        when(mapper.map(emprestimo, EmprestimoDTO.class)).thenReturn(new EmprestimoDTO(1, LocalDate.now(), LocalDate.now(), Status.DEVOLVIDO, 1, 1));
+
+
+        EmprestimoDTO resultado = emprestimoService.patchEmprestimo(patchDTO);
+
+
+        assertNotNull(resultado);
+        assertEquals(Status.DEVOLVIDO, resultado.getStatusEmprestimo());
+        verify(emprestimoRepository, times(1)).save(emprestimo);
+    }
+
+    @Test
+    @DisplayName("Deve atualizar a data de devolução de um empréstimo com sucesso")
+    void deveAtualizarDataDevolucaoDoEmprestimo() {
+        Livro livro = new Livro(1, "Livro 1", "Autor 1", "ISBN 1", Categoria.DRAMA, null);
+        Usuario usuario = new Usuario(1, "Nome 1", "Email 1", LocalDate.now(), "Telefone 1", null);
+        Emprestimo emprestimo = new Emprestimo(1, LocalDate.now(), LocalDate.now(), Status.EMPRESTADO, usuario, livro);
+
+        LocalDate novaDataDevolucao = LocalDate.now().plusDays(7);
+        PatchEmprestimoDTO patchDTO = new PatchEmprestimoDTO();
+        patchDTO.setId(1);
+        patchDTO.setDataDevolucao(novaDataDevolucao);
+
+        when(emprestimoRepository.findById(1)).thenReturn(Optional.of(emprestimo));
+        when(emprestimoRepository.save(any(Emprestimo.class))).thenReturn(emprestimo);
+        when(mapper.map(emprestimo, EmprestimoDTO.class)).thenReturn(new EmprestimoDTO(1, LocalDate.now(), novaDataDevolucao, Status.EMPRESTADO, 1, 1));
+
+        EmprestimoDTO resultado = emprestimoService.patchEmprestimo(patchDTO);
+
+        assertNotNull(resultado);
+        assertEquals(novaDataDevolucao, resultado.getDataDevolucao());
+        verify(emprestimoRepository, times(1)).save(emprestimo);
     }
 
 }

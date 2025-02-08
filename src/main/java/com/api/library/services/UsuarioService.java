@@ -69,7 +69,7 @@ public class UsuarioService {
      * @return Um UsuarioDTO com os dados do usuário atualizado
      */
     @Transactional(rollbackFor = Exception.class)
-    public UsuarioDTO patchUsuario(@Valid UsuarioDTO usuarioDTO) {
+    public UsuarioDTO patchUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = repository.findById(usuarioDTO.getId()).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
         BeanUtils.copyProperties(usuarioDTO, usuario);
         return mapper.map(repository.save(usuario), UsuarioDTO.class);
