@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+/**
+ * Classe de testes para Usuario controller
+ */
 @ExtendWith(MockitoExtension.class)
 class UsuarioControllerTest {
 

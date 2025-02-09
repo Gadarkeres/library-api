@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+/**
+ * Classe de testes para Emprestimo controller
+ */
 @ExtendWith(MockitoExtension.class)
 class EmprestimoControllerTest {
 
