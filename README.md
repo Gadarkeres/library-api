@@ -4,8 +4,9 @@ Este projeto utiliza java 21 com postgres como banco de dados e spring boot para
 ## Pre-requisitos
 
 - Java 21
-- Postgres
+- Postgres (16)
 - Spring Boot
+- git
 
 ## Instalação
 
@@ -17,11 +18,6 @@ cd library-api
 code .
 ```
 
-- Instalar as dependências
-
-```bash
-mvn install
-```
 - Crie um banco de dados Postgres com o nome "library"
 - Após criar o banco de dados, configure as variáveis de ambiente como abaixo:
 
@@ -31,7 +27,13 @@ spring.datasource.username=postgres // substitua pelo seu usuario
 spring.datasource.password=root // substitua pela sua senha
 ```
 
-- Este projeto utiliza Flyway para gerenciamento de migrations, será criado um catalogo de livros, mas não será criado um usuário e emprestimos incialmente.
+- Instalar as dependências
+
+```bash
+mvn install
+```
+
+- Este projeto utiliza Flyway para gerenciamento de migrations, será criado todas as tabelas e será populado automaticamente somente a tabela de livros, mas não deemprestimos incialmente.
 ## Execução
 
 - Executando os testes
@@ -46,4 +48,7 @@ mvn test
 mvn spring-boot:run
 ``` 
 
-- Acessar a documentação do projeto em http://localhost:8080/swagger-ui/index.html
+## Acessando a API:
+
+- A API estará disponível em http://localhost:8080.
+- A documentação da API pode ser acessada via Swagger em: http://localhost:8080/swagger-ui/index.html.
