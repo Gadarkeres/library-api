@@ -18,8 +18,8 @@ import java.time.LocalDate;
 @Data
 public class EmprestimoDTO {
     private Integer id;
-    @NotNull(message = "A data de emprestimo é obrigatória")
-    @PastOrPresent(message = "A data de emprestimo não pode no futuro")
+    @NotNull(message = "A data de empréstimo é obrigatória")
+    @PastOrPresent(message = "A data de empréstimo não pode ser no futuro")
     private LocalDate dataEmprestimo;
     @NotNull(message = "A data de devolucao é obrigatória")
     private LocalDate dataDevolucao;

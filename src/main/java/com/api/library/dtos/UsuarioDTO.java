@@ -24,7 +24,7 @@ public class UsuarioDTO {
     @Email(message = "O email é inválido")
     private String email;
     @NotNull(message = "A data de cadastro é obrigatória")
-    @PastOrPresent(message = "A data de cadastro não pode no futuro")
+    @PastOrPresent(message = "A data de cadastro não pode ser no futuro")
     private LocalDate dataCadastro;
     @NotNull(message = "O telefone é obrigatório")
     private String telefone;
