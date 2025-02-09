@@ -5,7 +5,7 @@ Este projeto utiliza java 21 com postgres como banco de dados e spring boot para
 
 - Java 21
 - Postgres (16)
-- Spring Boot
+- maven 3.9.8
 - git
 
 ## Instalação
